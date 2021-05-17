@@ -865,6 +865,7 @@ namespace UnityEditor.U2D.PSD
                         var srGameObject = m_GameObjectFactory.CreateGameObject(string.IsNullOrEmpty(categoryName) ? sprites[i].name : categoryName);
                         var sr = srGameObject.AddComponent<SpriteRenderer>();
                         sr.sprite = sprites[i];
+                        sr.color = new Color(1, 1, 1, psdLayers.First(x => x.spriteID == sprites[i].GetSpriteID()).opacity / 255f);
                         sr.sortingOrder = psdLayers.Count - psdLayers.FindIndex(x => x.spriteID == sprites[i].GetSpriteID());
                         srGameObject.transform.parent = rootBone.transform;
                         var spriteMetaData = spriteImportData.FirstOrDefault(x => x.spriteID == sprites[i].GetSpriteID());
@@ -932,6 +933,7 @@ namespace UnityEditor.U2D.PSD
                     {
                         var spriteRenderer = l.gameObject.AddComponent<SpriteRenderer>();
                         spriteRenderer.sprite = sprite;
+                        spriteRenderer.color = new Color(1, 1, 1, l.opacity / 255f);
                         spriteRenderer.sortingOrder = psdLayers.Count - i;
                         var uvTransform = spriteMetaData.uvTransform;
                         var outlineOffset = new Vector2(spriteMetaData.rect.x - uvTransform.x + (spriteMetaData.pivot.x * spriteMetaData.rect.width),

@@ -25,7 +25,7 @@ namespace UnityEditor.U2D.PSD
         [NonSerialized]
         GameObject m_GameObject;
 
-        public PSDLayer(NativeArray<Color32> tex, int parent, bool group, string layerName, int width, int height, int id)
+        public PSDLayer(NativeArray<Color32> tex, int parent, bool group, string layerName, int width, int height, int id, byte opacity)
         {
             isGroup = group;
             parentIndex = parent;
@@ -34,6 +34,7 @@ namespace UnityEditor.U2D.PSD
             this.width = width;
             this.height = height;
             layerID = id;
+            this.opacity = opacity;
         }
 
         public int layerID { get { return m_LayerID; } private set { m_LayerID = value; } }
@@ -55,5 +56,8 @@ namespace UnityEditor.U2D.PSD
             if (texture.IsCreated)
                 texture.Dispose();
         }
+
+
+        [SerializeField] public byte opacity;
     }
 }
